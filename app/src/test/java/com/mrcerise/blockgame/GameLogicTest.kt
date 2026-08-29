@@ -61,21 +61,100 @@ class GameLogicTest {
         }
     }
 
+    /**
+     * A chain now survives CHAIN_GRACE_MOVES dry moves before it breaks, rather than
+     * dying on the first one.
+     */
     @Test
-    fun noClearResetsStreak() {
+    fun chainSurvivesGraceMovesThenBreaks() {
         val g = Game(Random(3))
         val single = PieceShape(listOf(Cell(0, 0)))
-        // clear a line once
+        // clear a line once -> chain starts, grace is full
         for (c in 1..7) g.grid[7][c] = true
-        val s1 = forceTray(g, single)
-        g.place(s1, 7, 0)
+        g.place(forceTray(g, single), 7, 0)
         assertEquals(1, g.streak)
-        // next move clears nothing
-        val s2 = forceTray(g, single)
-        val r2 = g.place(s2, 0, 0)
-        assertEquals(0, r2.streak)
-        assertEquals(0, g.streak)
-        assertEquals(1, r2.gained)
+        assertEquals(Game.CHAIN_GRACE_MOVES, g.chainGrace)
+
+        // each dry move burns one grace, chain holds
+        for (i in 1..Game.CHAIN_GRACE_MOVES) {
+            val r = g.place(forceTray(g, single), 0, i)
+            assertEquals("chain should survive dry move #" + i, 1, g.streak)
+            assertEquals(1, r.gained)
+        }
+        // the next dry move finally breaks it
+        g.place(forceTray(g, single), 1, 0)
+        assertEquals("chain should break once grace is spent", 0, g.streak)
+    }
+
+    @Test
+    fun refillKeepsTrayPlayableEarlyOn() {
+        // score 0 => helpChance is 1.0, so every refill must be a solvable set
+        val g = Game(Random(3))
+        assertEquals(1f, g.helpChance(), 0.0001f)
+        repeat(20) {
+            for (i in g.tray.indices) g.tray[i] = null
+            g.refillTray()
+            val tray = g.tray.filterNotNull()
+            assertEquals(3, tray.size)
+            assertTrue("refilled tray should be placeable in some order",
+                g.playableInOrder(tray))
+        }
+    }
+
+    @Test
+    fun helpFadesAsScoreClimbs() {
+        val g = Game(Random(3))
+        assertEquals(1f, g.helpChance(), 0.0001f)
+        g.score = 2000
+        assertTrue("~50% help at 2000", g.helpChance() in 0.45f..0.55f)
+        g.score = 10000
+        assertTrue("~10% help at 10000", g.helpChance() in 0.05f..0.15f)
+        g.score = 500000
+        assertTrue("help never vanishes entirely", g.helpChance() > 0f)
+        assertTrue("but stays low late game", g.helpChance() < 0.15f)
+    }
+
+    /**
+     * The search must simulate line clears, not just raw fit: a piece that cannot be
+     * placed right now may become placeable once an earlier piece clears a line.
+     */
+    @Test
+    fun playableInOrderAccountsForLineClears() {
+        val g = Game(Random(3))
+        for (r in 0..4) for (c in 0..7) g.grid[r][c] = true   // rows 0-4 full
+        for (c in 2..7) g.grid[7][c] = true                   // row 7 needs cols 0 and 1
+
+        val domino = PieceShape(listOf(Cell(0, 0), Cell(0, 1)))
+        val square = PieceShape(listOf(
+            Cell(0,0), Cell(0,1), Cell(0,2),
+            Cell(1,0), Cell(1,1), Cell(1,2),
+            Cell(2,0), Cell(2,1), Cell(2,2)))
+
+        // right now the square fits nowhere: rows 5 and 6 are open but row 7 is blocked
+        assertFalse(g.canPlaceAnywhere(square))
+
+        // ...yet domino-first completes row 7, which clears and opens rows 5-7 for the
+        // square. The search has to find that ordering.
+        assertTrue(g.playableInOrder(listOf(domino, square)))
+        // and it must find it regardless of the order the pieces are handed to it
+        assertTrue(g.playableInOrder(listOf(square, domino)))
+    }
+
+    /** The search must be able to say "no" — it is not allowed to just return true. */
+    @Test
+    fun playableInOrderRejectsGenuinelyImpossibleTrays() {
+        val g = Game(Random(3))
+        for (r in 0..7) for (c in 0..7) g.grid[r][c] = true
+        g.grid[4][4] = false                                  // one isolated hole
+
+        val domino = PieceShape(listOf(Cell(0, 0), Cell(0, 1)))
+        val single = PieceShape(listOf(Cell(0, 0)))
+
+        assertFalse("a domino cannot fit a single isolated hole",
+            g.playableInOrder(listOf(domino)))
+        assertTrue("a single block can", g.playableInOrder(listOf(single)))
+        // two singles: the first clears row 4 + column 4, leaving room for the second
+        assertTrue(g.playableInOrder(listOf(single, single)))
     }
 
     @Test

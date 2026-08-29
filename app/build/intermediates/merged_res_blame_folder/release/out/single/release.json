@@ -1,58 +1,58 @@
 [
     {
-        "merged": "com.blockblast.game.app-merged_res-4:/mipmap-xhdpi_ic_launcher_round.png.flat",
-        "source": "com.blockblast.game.app-main-5:/mipmap-xhdpi/ic_launcher_round.png"
+        "merged": "com.mrcerise.blockgame.app-merged_res-4:/mipmap-xxxhdpi_ic_launcher_round.png.flat",
+        "source": "com.mrcerise.blockgame.app-main-5:/mipmap-xxxhdpi/ic_launcher_round.png"
     },
     {
-        "merged": "com.blockblast.game.app-merged_res-4:/mipmap-xxhdpi_ic_launcher_round.png.flat",
-        "source": "com.blockblast.game.app-main-5:/mipmap-xxhdpi/ic_launcher_round.png"
+        "merged": "com.mrcerise.blockgame.app-merged_res-4:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "com.mrcerise.blockgame.app-main-5:/mipmap-anydpi-v26/ic_launcher.xml"
     },
     {
-        "merged": "com.blockblast.game.app-merged_res-4:/drawable_ic_launcher_background.xml.flat",
-        "source": "com.blockblast.game.app-main-5:/drawable/ic_launcher_background.xml"
+        "merged": "com.mrcerise.blockgame.app-merged_res-4:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "com.mrcerise.blockgame.app-main-5:/drawable/ic_launcher_foreground.xml"
     },
     {
-        "merged": "com.blockblast.game.app-merged_res-4:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
-        "source": "com.blockblast.game.app-main-5:/mipmap-anydpi-v26/ic_launcher_round.xml"
+        "merged": "com.mrcerise.blockgame.app-merged_res-4:/mipmap-hdpi_ic_launcher_round.png.flat",
+        "source": "com.mrcerise.blockgame.app-main-5:/mipmap-hdpi/ic_launcher_round.png"
     },
     {
-        "merged": "com.blockblast.game.app-merged_res-4:/mipmap-xxxhdpi_ic_launcher_round.png.flat",
-        "source": "com.blockblast.game.app-main-5:/mipmap-xxxhdpi/ic_launcher_round.png"
+        "merged": "com.mrcerise.blockgame.app-merged_res-4:/mipmap-mdpi_ic_launcher.png.flat",
+        "source": "com.mrcerise.blockgame.app-main-5:/mipmap-mdpi/ic_launcher.png"
     },
     {
-        "merged": "com.blockblast.game.app-merged_res-4:/mipmap-mdpi_ic_launcher_round.png.flat",
-        "source": "com.blockblast.game.app-main-5:/mipmap-mdpi/ic_launcher_round.png"
+        "merged": "com.mrcerise.blockgame.app-merged_res-4:/mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "com.mrcerise.blockgame.app-main-5:/mipmap-xhdpi/ic_launcher.png"
     },
     {
-        "merged": "com.blockblast.game.app-merged_res-4:/mipmap-xhdpi_ic_launcher.png.flat",
-        "source": "com.blockblast.game.app-main-5:/mipmap-xhdpi/ic_launcher.png"
+        "merged": "com.mrcerise.blockgame.app-merged_res-4:/mipmap-hdpi_ic_launcher.png.flat",
+        "source": "com.mrcerise.blockgame.app-main-5:/mipmap-hdpi/ic_launcher.png"
     },
     {
-        "merged": "com.blockblast.game.app-merged_res-4:/mipmap-xxhdpi_ic_launcher.png.flat",
-        "source": "com.blockblast.game.app-main-5:/mipmap-xxhdpi/ic_launcher.png"
+        "merged": "com.mrcerise.blockgame.app-merged_res-4:/mipmap-mdpi_ic_launcher_round.png.flat",
+        "source": "com.mrcerise.blockgame.app-main-5:/mipmap-mdpi/ic_launcher_round.png"
     },
     {
-        "merged": "com.blockblast.game.app-merged_res-4:/mipmap-hdpi_ic_launcher.png.flat",
-        "source": "com.blockblast.game.app-main-5:/mipmap-hdpi/ic_launcher.png"
+        "merged": "com.mrcerise.blockgame.app-merged_res-4:/mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "com.mrcerise.blockgame.app-main-5:/mipmap-xxxhdpi/ic_launcher.png"
     },
     {
-        "merged": "com.blockblast.game.app-merged_res-4:/mipmap-xxxhdpi_ic_launcher.png.flat",
-        "source": "com.blockblast.game.app-main-5:/mipmap-xxxhdpi/ic_launcher.png"
+        "merged": "com.mrcerise.blockgame.app-merged_res-4:/mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "com.mrcerise.blockgame.app-main-5:/mipmap-xxhdpi/ic_launcher.png"
     },
     {
-        "merged": "com.blockblast.game.app-merged_res-4:/mipmap-hdpi_ic_launcher_round.png.flat",
-        "source": "com.blockblast.game.app-main-5:/mipmap-hdpi/ic_launcher_round.png"
+        "merged": "com.mrcerise.blockgame.app-merged_res-4:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "com.mrcerise.blockgame.app-main-5:/mipmap-anydpi-v26/ic_launcher_round.xml"
     },
     {
-        "merged": "com.blockblast.game.app-merged_res-4:/mipmap-mdpi_ic_launcher.png.flat",
-        "source": "com.blockblast.game.app-main-5:/mipmap-mdpi/ic_launcher.png"
+        "merged": "com.mrcerise.blockgame.app-merged_res-4:/drawable_ic_launcher_background.xml.flat",
+        "source": "com.mrcerise.blockgame.app-main-5:/drawable/ic_launcher_background.xml"
     },
     {
-        "merged": "com.blockblast.game.app-merged_res-4:/drawable_ic_launcher_foreground.xml.flat",
-        "source": "com.blockblast.game.app-main-5:/drawable/ic_launcher_foreground.xml"
+        "merged": "com.mrcerise.blockgame.app-merged_res-4:/mipmap-xxhdpi_ic_launcher_round.png.flat",
+        "source": "com.mrcerise.blockgame.app-main-5:/mipmap-xxhdpi/ic_launcher_round.png"
     },
     {
-        "merged": "com.blockblast.game.app-merged_res-4:/mipmap-anydpi-v26_ic_launcher.xml.flat",
-        "source": "com.blockblast.game.app-main-5:/mipmap-anydpi-v26/ic_launcher.xml"
+        "merged": "com.mrcerise.blockgame.app-merged_res-4:/mipmap-xhdpi_ic_launcher_round.png.flat",
+        "source": "com.mrcerise.blockgame.app-main-5:/mipmap-xhdpi/ic_launcher_round.png"
     }
 ]

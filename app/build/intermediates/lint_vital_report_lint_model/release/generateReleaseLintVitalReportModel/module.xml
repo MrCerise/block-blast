@@ -1,12 +1,12 @@
 <lint-module
     format="1"
-    dir="/home/zoom/Projects/BlockBlast/app"
+    dir="/home/madison/block-blast/app"
     name=":app"
     type="APP"
     maven="BlockBlast:app:"
     agpVersion="8.2.2"
     buildFolder="build"
-    bootClassPath="/tmp/fake-android-sdk/platforms/android-34/android.jar:/tmp/fake-android-sdk/build-tools/34.0.0/core-lambda-stubs.jar"
+    bootClassPath="/tmp/claude-1000/-home-madison-block-blast/a2ff72a3-b53f-4ef4-857e-90f50510cf1d/scratchpad/toolchain/sdk/platforms/android-34/android.jar:/tmp/claude-1000/-home-madison-block-blast/a2ff72a3-b53f-4ef4-857e-90f50510cf1d/scratchpad/toolchain/sdk/build-tools/34.0.0/core-lambda-stubs.jar"
     javaSourceLevel="17"
     compileTarget="android-34"
     neverShrinking="true">

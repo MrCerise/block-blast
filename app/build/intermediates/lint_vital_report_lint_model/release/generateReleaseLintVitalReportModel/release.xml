@@ -1,6 +1,6 @@
 <variant
     name="release"
-    package="com.blockblast.game"
+    package="com.mrcerise.blockgame"
     minSdkVersion="24"
     targetSdkVersion="34"
     mergedManifest="build/intermediates/merged_manifest/release/AndroidManifest.xml"
@@ -23,9 +23,9 @@
   <artifact
       classOutputs="build/intermediates/javac/release/classes:build/tmp/kotlin-classes/release:build/kotlinToolingMetadata:build/intermediates/compile_and_runtime_not_namespaced_r_class_jar/release/R.jar"
       type="MAIN"
-      applicationId="com.blockblast.game"
+      applicationId="com.mrcerise.blockgame"
       generatedSourceFolders="build/generated/ap_generated_sources/release/out"
       generatedResourceFolders="build/generated/res/resValues/release"
-      desugaredMethodsFiles="/home/zoom/.gradle/caches/transforms-3/e78109f4346dbddcc27a2af0df2e6a49/transformed/D8BackportedDesugaredMethods.txt">
+      desugaredMethodsFiles="/home/madison/.gradle/caches/transforms-3/e78109f4346dbddcc27a2af0df2e6a49/transformed/D8BackportedDesugaredMethods.txt">
   </artifact>
 </variant>

@@ -29,11 +29,48 @@ class MainActivity : Activity() {
 
     private fun startGame() {
         val view = GameView(this)
-        // Render the custom canvas with the software pipeline, which is fully
-        // supported on every Android device and avoids vendor GPU driver bugs.
-        view.setLayerType(View.LAYER_TYPE_SOFTWARE, null)
+        // Keep the view on the hardware pipeline. LAYER_TYPE_NONE means "no off-screen
+        // layer at all" -- LAYER_TYPE_HARDWARE would still force a full-screen buffer,
+        // and LAYER_TYPE_SOFTWARE (used previously) forced every frame to be rasterized
+        // on the CPU into a full-screen bitmap and re-uploaded to the GPU.
+        view.setLayerType(View.LAYER_TYPE_NONE, null)
+        view.onDisplayPrefsChanged = { applyRefreshRate(view.maxFps) }
         setContentView(view)
         makeFullscreen()
+        // the decor view needs to be attached before its Display is available
+        view.post { applyRefreshRate(view.maxFps) }
+    }
+
+    /**
+     * Ask the compositor for the display's fastest mode at the current resolution.
+     *
+     * Android presents frames at vsync, so the panel's refresh rate is a hard ceiling --
+     * a View cannot draw "unlimited" frames, and spinning faster would only burn battery
+     * on frames that are never shown. What this does buy is real: many devices run apps
+     * at 60Hz by default even on 90/120Hz panels, and this lifts the game to the panel's
+     * maximum. Modes are filtered to the current resolution so requesting a faster mode
+     * can never silently drop the render resolution.
+     */
+    private fun applyRefreshRate(max: Boolean) {
+        try {
+            val lp = window.attributes
+            val display = window.decorView.display
+            lp.preferredDisplayModeId = if (max && display != null) {
+                val current = display.mode
+                display.supportedModes
+                    .filter {
+                        it.physicalWidth == current.physicalWidth &&
+                            it.physicalHeight == current.physicalHeight
+                    }
+                    .maxByOrNull { it.refreshRate }
+                    ?.modeId ?: 0
+            } else {
+                0   // 0 = let the system choose
+            }
+            window.attributes = lp
+        } catch (_: Throwable) {
+            // never let a display-mode request stop the game from running
+        }
     }
 
     private fun makeFullscreen() {

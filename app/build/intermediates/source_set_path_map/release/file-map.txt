@@ -1,7 +1,7 @@
-com.blockblast.game.app-pngs-0 /home/zoom/Projects/BlockBlast/app/build/generated/res/pngs/release
-com.blockblast.game.app-resValues-1 /home/zoom/Projects/BlockBlast/app/build/generated/res/resValues/release
-com.blockblast.game.app-packageReleaseResources-2 /home/zoom/Projects/BlockBlast/app/build/intermediates/incremental/release/packageReleaseResources/merged.dir
-com.blockblast.game.app-packageReleaseResources-3 /home/zoom/Projects/BlockBlast/app/build/intermediates/incremental/release/packageReleaseResources/stripped.dir
-com.blockblast.game.app-merged_res-4 /home/zoom/Projects/BlockBlast/app/build/intermediates/merged_res/release
-com.blockblast.game.app-main-5 /home/zoom/Projects/BlockBlast/app/src/main/res
-com.blockblast.game.app-release-6 /home/zoom/Projects/BlockBlast/app/src/release/res
+com.mrcerise.blockgame.app-pngs-0 /home/madison/block-blast/app/build/generated/res/pngs/release
+com.mrcerise.blockgame.app-resValues-1 /home/madison/block-blast/app/build/generated/res/resValues/release
+com.mrcerise.blockgame.app-packageReleaseResources-2 /home/madison/block-blast/app/build/intermediates/incremental/release/packageReleaseResources/merged.dir
+com.mrcerise.blockgame.app-packageReleaseResources-3 /home/madison/block-blast/app/build/intermediates/incremental/release/packageReleaseResources/stripped.dir
+com.mrcerise.blockgame.app-merged_res-4 /home/madison/block-blast/app/build/intermediates/merged_res/release
+com.mrcerise.blockgame.app-main-5 /home/madison/block-blast/app/src/main/res
+com.mrcerise.blockgame.app-release-6 /home/madison/block-blast/app/src/release/res

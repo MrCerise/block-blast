@@ -1,0 +1,4 @@
+#Sat Aug 29 15:54:53 PDT 2026
+base.0=/home/madison/block-blast/app/build/intermediates/dex/release/mergeDexRelease/classes.dex
+path.0=classes.dex
+renamed.0=classes.dex

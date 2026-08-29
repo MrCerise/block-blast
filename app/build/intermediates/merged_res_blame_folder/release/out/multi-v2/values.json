@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.blockblast.game.app-mergeReleaseResources-2:/values/values.xml",
+            "outputFile": "com.mrcerise.blockgame.app-mergeReleaseResources-2:/values/values.xml",
             "map": [
                 {
-                    "source": "/home/zoom/Projects/BlockBlast/app/src/main/res/values/themes.xml",
+                    "source": "/home/madison/block-blast/app/src/main/res/values/themes.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -23,7 +23,7 @@
                     }
                 },
                 {
-                    "source": "/home/zoom/Projects/BlockBlast/app/src/main/res/values/colors.xml",
+                    "source": "/home/madison/block-blast/app/src/main/res/values/colors.xml",
                     "from": {
                         "startLines": "2,3",
                         "startColumns": "4,4",
@@ -40,7 +40,7 @@
                     }
                 },
                 {
-                    "source": "/home/zoom/Projects/BlockBlast/app/src/main/res/values/strings.xml",
+                    "source": "/home/madison/block-blast/app/src/main/res/values/strings.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

@@ -1,8 +1,8 @@
-com.blockblast.game:string/app_name = 0x7f040000
-com.blockblast.game:mipmap/ic_launcher_round = 0x7f030001
-com.blockblast.game:style/Theme.BlockBlast = 0x7f050000
-com.blockblast.game:mipmap/ic_launcher = 0x7f030000
-com.blockblast.game:color/white = 0x7f010001
-com.blockblast.game:drawable/ic_launcher_foreground = 0x7f020001
-com.blockblast.game:drawable/ic_launcher_background = 0x7f020000
-com.blockblast.game:color/bg = 0x7f010000
+com.mrcerise.blockgame:style/Theme.BlockBlast = 0x7f050000
+com.mrcerise.blockgame:string/app_name = 0x7f040000
+com.mrcerise.blockgame:mipmap/ic_launcher_round = 0x7f030001
+com.mrcerise.blockgame:mipmap/ic_launcher = 0x7f030000
+com.mrcerise.blockgame:drawable/ic_launcher_foreground = 0x7f020001
+com.mrcerise.blockgame:color/bg = 0x7f010000
+com.mrcerise.blockgame:drawable/ic_launcher_background = 0x7f020000
+com.mrcerise.blockgame:color/white = 0x7f010001

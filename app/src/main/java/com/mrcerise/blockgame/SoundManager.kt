@@ -4,6 +4,11 @@ import android.media.AudioAttributes
 import android.media.AudioFormat
 import android.media.AudioManager
 import android.media.AudioTrack
+import java.util.concurrent.ConcurrentHashMap
+import java.util.concurrent.SynchronousQueue
+import java.util.concurrent.ThreadFactory
+import java.util.concurrent.ThreadPoolExecutor
+import java.util.concurrent.TimeUnit
 import kotlin.math.exp
 import kotlin.math.sin
 
@@ -13,6 +18,30 @@ class SoundManager {
     var enabled = true
 
     private val sampleRate = 44100
+
+    /**
+     * Every clip is deterministic, so it is synthesized at most once and then reused.
+     * Both the synthesis and the playback happen off the UI thread: generating a clip
+     * costs tens of thousands of sin()/exp() calls, and doing that inline used to stall
+     * the frame on exactly the taps that trigger the most animation (line clear, game
+     * over).
+     */
+    private val clips = ConcurrentHashMap<String, ShortArray>()
+
+    private val threadFactory = ThreadFactory { r ->
+        Thread(r, "sfx").apply { isDaemon = true; priority = Thread.MIN_PRIORITY }
+    }
+
+    /**
+     * Up to 3 clips may overlap; anything beyond that is dropped rather than queued,
+     * so a burst of sounds can never build up a backlog of sleeping threads.
+     */
+    private val executor = ThreadPoolExecutor(
+        0, 3, 5L, TimeUnit.SECONDS,
+        SynchronousQueue<Runnable>(),
+        threadFactory,
+        ThreadPoolExecutor.DiscardPolicy()
+    )
 
     private fun tone(freq: Double, durationMs: Int, volume: Float, sweepTo: Double = freq, delayMs: Int = 0): ShortArray {
         val n = sampleRate * (durationMs + delayMs) / 1000
@@ -42,12 +71,13 @@ class SoundManager {
         return out
     }
 
-    private fun play(vararg parts: ShortArray) {
+    /** Synthesize (once) and play [key]; all work happens on a background thread. */
+    private fun play(key: String, build: () -> ShortArray) {
         if (!enabled) return
         try {
-            val data = mix(*parts)
-            Thread {
+            executor.execute {
                 try {
+                    val data = clips.getOrPut(key, build)
                     val track = AudioTrack(
                         AudioAttributes.Builder()
                             .setUsage(AudioAttributes.USAGE_GAME)
@@ -69,37 +99,43 @@ class SoundManager {
                     track.release()
                 } catch (_: Throwable) {
                 }
-            }.start()
+            }
         } catch (_: Throwable) {
         }
     }
 
-    fun pickup() = play(tone(520.0, 60, 0.12f, sweepTo = 720.0))
+    fun pickup() = play("pickup") { tone(520.0, 60, 0.12f, sweepTo = 720.0) }
 
-    fun place() = play(
-        tone(240.0, 90, 0.25f, sweepTo = 170.0),
-        tone(480.0, 70, 0.10f, sweepTo = 380.0, delayMs = 12)
-    )
-
-    fun invalid() = play(tone(150.0, 120, 0.18f, sweepTo = 110.0))
-
-    fun click() = play(tone(660.0, 50, 0.14f, sweepTo = 880.0))
-
-    fun clear(lines: Int) {
-        val base = when {
-            lines >= 4 -> doubleArrayOf(523.0, 659.0, 784.0, 1047.0, 1319.0)
-            lines >= 2 -> doubleArrayOf(523.0, 659.0, 784.0, 1047.0)
-            else -> doubleArrayOf(523.0, 784.0, 1047.0)
-        }
-        val parts = Array(base.size) { i ->
-            tone(base[i], 140, 0.22f, sweepTo = base[i] * 1.02, delayMs = i * 55)
-        }
-        play(*parts)
+    fun place() = play("place") {
+        mix(
+            tone(240.0, 90, 0.25f, sweepTo = 170.0),
+            tone(480.0, 70, 0.10f, sweepTo = 380.0, delayMs = 12)
+        )
     }
 
-    fun gameOver() = play(
-        tone(392.0, 220, 0.22f, sweepTo = 330.0),
-        tone(330.0, 260, 0.22f, sweepTo = 262.0, delayMs = 200),
-        tone(262.0, 420, 0.22f, sweepTo = 196.0, delayMs = 430)
-    )
+    fun invalid() = play("invalid") { tone(150.0, 120, 0.18f, sweepTo = 110.0) }
+
+    fun click() = play("click") { tone(660.0, 50, 0.14f, sweepTo = 880.0) }
+
+    fun clear(lines: Int) {
+        val tier = if (lines >= 4) 4 else if (lines >= 2) 2 else 1
+        play("clear$tier") {
+            val base = when (tier) {
+                4 -> doubleArrayOf(523.0, 659.0, 784.0, 1047.0, 1319.0)
+                2 -> doubleArrayOf(523.0, 659.0, 784.0, 1047.0)
+                else -> doubleArrayOf(523.0, 784.0, 1047.0)
+            }
+            mix(*Array(base.size) { i ->
+                tone(base[i], 140, 0.22f, sweepTo = base[i] * 1.02, delayMs = i * 55)
+            })
+        }
+    }
+
+    fun gameOver() = play("gameOver") {
+        mix(
+            tone(392.0, 220, 0.22f, sweepTo = 330.0),
+            tone(330.0, 260, 0.22f, sweepTo = 262.0, delayMs = 200),
+            tone(262.0, 420, 0.22f, sweepTo = 196.0, delayMs = 430)
+        )
+    }
 }

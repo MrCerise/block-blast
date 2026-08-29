@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.blockblast.game"
+    package="com.mrcerise.blockgame"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -9,7 +9,7 @@
         android:targetSdkVersion="34" />
 
     <application
-        android:name="com.blockblast.game.BlockBlastApplication"
+        android:name="com.mrcerise.blockgame.BlockBlastApplication"
         android:allowBackup="true"
         android:extractNativeLibs="false"
         android:icon="@mipmap/ic_launcher"
@@ -18,7 +18,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BlockBlast" >
         <activity
-            android:name="com.blockblast.game.MainActivity"
+            android:name="com.mrcerise.blockgame.MainActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:exported="true"
             android:screenOrientation="portrait" >
